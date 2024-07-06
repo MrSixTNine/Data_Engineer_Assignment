@@ -20,7 +20,7 @@ services:
     environment:
       CONNECTIONS: de_assingment
       LABEL_de_assingment: de_assingment
-      URL_de_assingment: postgres://master_tk:120344@postgres:5432/postgres
+      URL_de_assingment: postgres://master_tk:120344@postgres:5432/master_tk
       ENGINE_de_assingment: postgres@dbgate-plugin-postgres
     volumes:
       - dbgate_data:/root/.dbgate
