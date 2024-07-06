@@ -12,11 +12,12 @@ CREATE TABLE pre_prd.product_catalog (
     created_at     TIMESTAMP DEFAULT timezone('Asia/Bangkok', NOW()),
     updated_by     VARCHAR(255) DEFAULT 'Admin' NOT NULL,
     updated_at     TIMESTAMP DEFAULT timezone('Asia/Bangkok', NOW()),
+    
     CONSTRAINT product_catalog_product_id_uniquekey UNIQUE (product_id)
 );
 
 CREATE TABLE pre_prd.customer_transactions (
-    transaction_id UUID NOT NULL,
+    transaction_id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     customer_id    VARCHAR(10) NOT NULL,
     product_id     VARCHAR(10) NOT NULL,
     quantity       INT NOT NULL,
@@ -26,6 +27,6 @@ CREATE TABLE pre_prd.customer_transactions (
     created_at     TIMESTAMP DEFAULT timezone('Asia/Bangkok', NOW()),
     updated_by     VARCHAR(255) DEFAULT 'Admin' NOT NULL,
     updated_at     TIMESTAMP DEFAULT timezone('Asia/Bangkok', NOW()),
-    CONSTRAINT customer_transaction_transaction_id_pkey PRIMARY KEY (transaction_id),
+    
     CONSTRAINT customer_transaction_product_id_fkey FOREIGN KEY (product_id) REFERENCES pre_prd.product_catalog(product_id)
 );
