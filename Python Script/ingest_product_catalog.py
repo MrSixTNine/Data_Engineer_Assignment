@@ -2,7 +2,12 @@ import pandas as pd
 import  os
 import sys
 from sqlalchemy import create_engine
+from shared_functions import *
 from pathlib import Path
+
+# Name of schema and table for store customer transactions data
+schema_name = 'pre_prd'
+table_name = 'product_catalog'
 
 # Get the current directory (where this script is located)
 current_dir = Path(sys.path[0])
@@ -31,12 +36,5 @@ def generate_product_name(row):
 # Apply function to 'product_name' column
 df['product_name'] = df.apply(generate_product_name, axis=1)
 
-# Create an engine instance
-engine = create_engine('postgresql://master_tk:120344@localhost:5432/postgres')
+insert_into_postgres(df, table_name, schema_name)
 
-# Insert data into PostgreSQL database
-try:
-    df.to_sql('customer_transactions', engine, if_exists='append', index=False, schema='pre_prd')
-    print("Data successfully inserted into PostgreSQL database.")
-except Exception as e:
-    print("Error:", e)
