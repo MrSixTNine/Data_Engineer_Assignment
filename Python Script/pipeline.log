@@ -1,9 +1,10 @@
-2024-07-07 04:24:13,415 - INFO - Running script: ingest_product_catalog.py
-2024-07-07 04:24:17,547 - ERROR - Error running ingest_product_catalog.py: Traceback (most recent call last):
-  File "E:\test\Data_Engineer_Assignment\Python Script\ingest_product_catalog.py", line 5, in <module>
-    from shared_functions import *
-  File "E:\test\Data_Engineer_Assignment\Python Script\shared_functions.py", line 3, in <module>
-    from dotenv import load_dotenv
-ModuleNotFoundError: No module named 'dotenv'
+2024-07-07 05:07:16,982 - INFO - Running script: ingest_product_catalog.py
+2024-07-07 05:07:17,661 - INFO - Successfully ran ingest_product_catalog.py: C:\Users\User\Desktop\Data_Engineer_Assignment\Python Script
+Data successfully inserted into pre_prd.product_catalog
 
-2024-07-07 04:24:17,547 - ERROR - Pipeline stopped due to error in ingest_product_catalog.py
+2024-07-07 05:07:17,661 - INFO - Running script: ingest_customer_transactions.py
+2024-07-07 05:07:18,353 - INFO - Successfully ran ingest_customer_transactions.py: Data successfully inserted into pre_prd.customer_transactions
+
+2024-07-07 05:07:18,353 - INFO - Running script: process_product_sales_detail.py
+2024-07-07 05:07:19,078 - INFO - Successfully ran process_product_sales_detail.py: Data successfully inserted into prd.product_sales_detail
+

@@ -4,7 +4,7 @@ CREATE SCHEMA prd;
 
 CREATE TABLE pre_prd.product_catalog (
     id UUID DEFAULT gen_random_uuid(),
-    product_id UUID NOT NULL,
+    product_id VARCHAR(10) NOT NULL,
     product_name VARCHAR(255) NOT NULL,	
     category VARCHAR(255) NOT NULL,
     price FLOAT NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE pre_prd.product_catalog (
 CREATE TABLE pre_prd.customer_transactions (
     transaction_id UUID DEFAULT gen_random_uuid(),
     customer_id VARCHAR(10) NOT NULL,
-    product_id UUID NOT NULL,
+    product_id VARCHAR(10) NOT NULL,
     quantity INT NOT NULL,
     price FLOAT NOT NULL,
     "timestamp" TIMESTAMP,
@@ -34,7 +34,7 @@ CREATE TABLE pre_prd.customer_transactions (
 CREATE TABLE prd.product_sales_detail (
     transaction_id UUID DEFAULT gen_random_uuid(),
     customer_id VARCHAR(10) NOT NULL,
-    product_id UUID NOT NULL,
+    product_id VARCHAR(10) NOT NULL,
     product_name VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
     quantity INT NOT NULL,

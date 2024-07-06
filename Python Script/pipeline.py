@@ -1,5 +1,6 @@
 import subprocess
 import logging
+import sys
 
 # Setup logging
 logging.basicConfig(filename='pipeline.log', level=logging.INFO, 
@@ -9,8 +10,10 @@ def run_script(script_name):
     try:
         result = subprocess.run(['python', script_name], check=True, capture_output=True, text=True)
         logging.info(f"Successfully ran {script_name}: {result.stdout}")
+        return True
     except subprocess.CalledProcessError as e:
         logging.error(f"Error running {script_name}: {e.stderr}")
+        return False
 
 def main():
     scripts = [
@@ -21,8 +24,9 @@ def main():
     
     for script in scripts:
         logging.info(f"Running script: {script}")
-        run_script(script)
+        if not run_script(script):
+            logging.error(f"Pipeline stopped due to error in {script}")
+            sys.exit(1)  # Exit the script if any script fails
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     main()
-ingest_product_catalog.py
