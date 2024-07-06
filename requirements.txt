@@ -2,3 +2,4 @@ pandas
 os
 json
 sqlalchemy
+dotenv
