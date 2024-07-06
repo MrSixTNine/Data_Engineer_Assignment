@@ -42,6 +42,7 @@ df['quantity'] = pd.to_numeric(df['quantity'], errors='coerce')
 df = df[(df['price'] >= 0) & (df['price'].notna())]
 df = df[(df['quantity'] >= 0) & (df['price'].notna())]
 
+# Store data to postgresql database
 insert_into_postgres(df, table_name, schema_name)
 
 

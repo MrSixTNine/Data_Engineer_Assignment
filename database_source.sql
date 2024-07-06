@@ -40,11 +40,11 @@ CREATE TABLE prd.product_sales_detail (
     quantity	    INT NOT NULL,
     price	        FLOAT NOT NULL,
     total_price	    FLOAT NOT NULL,
-    transaction_date DATE NOT NULL;
+    transaction_date DATE NOT NULL,
     created_by     VARCHAR(255) DEFAULT 'Admin' NOT NULL,
     created_at     TIMESTAMP DEFAULT timezone('Asia/Bangkok', NOW()),
     updated_by     VARCHAR(255) DEFAULT 'Admin' NOT NULL,
     updated_at     TIMESTAMP DEFAULT timezone('Asia/Bangkok', NOW()),
-    CONSTRAINT product_sales_detail_transaction_id_pkey PRIMARY KEY (transaction_id),
+
     CONSTRAINT product_sales_detail_product_id_fkey FOREIGN KEY (product_id) REFERENCES pre_prd.product_catalog(product_id)
 );

@@ -36,5 +36,6 @@ def generate_product_name(row):
 # Apply function to 'product_name' column
 df['product_name'] = df.apply(generate_product_name, axis=1)
 
+# Store data to postgresql database
 insert_into_postgres(df, table_name, schema_name)
 
