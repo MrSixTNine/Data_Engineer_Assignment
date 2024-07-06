@@ -1,31 +1,14 @@
 import json
 import pandas as pd
 import os
-import psycopg2
 from shared_functions import *
 import sys
 from pathlib import Path
 from dotenv import load_dotenv
 
-table_name = 'customer_transactions'
+# Name of schema and table for store customer transactions data
 schema_name = 'pre_prd'
-
-# Load environment variables from config.env file
-dotenv_path = os.path.join(os.path.dirname(__file__), 'config.env')
-if os.path.exists(dotenv_path):
-    load_dotenv(dotenv_path)
-
-# Database connection details
-DATABASE_TYPE = os.getenv('DATABASE_TYPE')
-DBAPI = os.getenv('DBAPI')
-USER = os.getenv('USER')
-PASSWORD = os.getenv('PASSWORD')
-HOST = os.getenv('HOST')
-PORT = os.getenv('PORT')
-DATABASE = os.getenv('DATABASE')
-
-# Create the connection URL
-CONNECTION_URL = f"{DATABASE_TYPE}+{DBAPI}://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}"
+table_name = 'customer_transactions'
 
 # Get the current directory (where this script is located)
 current_dir = Path(sys.path[0])
@@ -47,9 +30,18 @@ df['quantity'] = df['quantity'].astype(int)
 df['price'] = df['price'].astype(float)
 df['timestamp'] = pd.to_datetime(df['timestamp'])
 
-# Clean transaction data
+## Clean data
+# Drop row if transaction_id duplicates 
 df.drop_duplicates(subset='transaction_id', keep="first", inplace=True)
+# Drop NA value of customer_id and product_id
+df.dropna(subset=['customer_id','product_id'], inplace=True)
+# Convert 'price' and 'quantity' to numeric, invalid parsing will be set as NaN
+df['price'] = pd.to_numeric(df['price'], errors='coerce')
+df['quantity'] = pd.to_numeric(df['quantity'], errors='coerce')
+# Filter out rows where 'price' is less than 0 or NaN
+df = df[(df['price'] >= 0) & (df['price'].notna())]
+df = df[(df['quantity'] >= 0) & (df['price'].notna())]
 
-print(df)
+insert_into_postgres(df, table_name, schema_name)
 
 
