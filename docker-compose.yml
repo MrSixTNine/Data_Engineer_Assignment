@@ -1,0 +1,31 @@
+services:
+  postgresql:
+    container_name: postgres
+    image: postgres:alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: master_tk
+      POSTGRES_PASSWORD: 120344
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data 
+    ports:
+      - 5432:5432
+
+  dbgate:
+    container_name: dbgate
+    image: dbgate/dbgate:alpine
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    environment:
+      CONNECTIONS: de_assingment
+      LABEL_de_assingment: de_assingment
+      URL_de_assingment: postgres://master_tk:120344@postgres:5432/postgres
+      ENGINE_de_assingment: postgres@dbgate-plugin-postgres
+    volumes:
+      - dbgate_data:/root/.dbgate
+
+volumes:
+  postgresql_data:
+  dbgate_data:
+    external: true
