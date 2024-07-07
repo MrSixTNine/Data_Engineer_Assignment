@@ -16,6 +16,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
-# Run main.py when the container launches
-CMD ["python", "pipeline.py"]
+# Set the working directory to /app/code
+WORKDIR /app/Python Script
 
+# Run pipeline.py when the container launches
+CMD ["python", "pipeline.py"]
