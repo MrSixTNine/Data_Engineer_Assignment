@@ -3,7 +3,6 @@ CREATE SCHEMA pre_prd;
 CREATE SCHEMA prd;
 
 CREATE TABLE pre_prd.product_catalog (
-    id UUID DEFAULT gen_random_uuid(),
     product_id VARCHAR(10) NOT NULL,
     product_name VARCHAR(255) NOT NULL,	
     category VARCHAR(255) NOT NULL,
@@ -12,12 +11,11 @@ CREATE TABLE pre_prd.product_catalog (
     created_at TIMESTAMP DEFAULT timezone('Asia/Bangkok', NOW()),
     updated_by VARCHAR(255) DEFAULT 'Admin' NOT NULL,
     updated_at TIMESTAMP DEFAULT timezone('Asia/Bangkok', NOW()),
-    CONSTRAINT product_catalog_id_pkey PRIMARY KEY(id),
-    CONSTRAINT product_catalog_product_id_uniquekey UNIQUE (product_id)
+    CONSTRAINT product_product_id_pkey PRIMARY KEY(product_id)
 );
 
 CREATE TABLE pre_prd.customer_transactions (
-    transaction_id UUID DEFAULT gen_random_uuid(),
+    transaction_id VARCHAR(255) NOT NULL,
     customer_id VARCHAR(10) NOT NULL,
     product_id VARCHAR(10) NOT NULL,
     quantity INT NOT NULL,
@@ -32,7 +30,7 @@ CREATE TABLE pre_prd.customer_transactions (
 );
 
 CREATE TABLE prd.product_sales_detail (
-    transaction_id UUID DEFAULT gen_random_uuid(),
+    transaction_id VARCHAR(255) NOT NULL,
     customer_id VARCHAR(10) NOT NULL,
     product_id VARCHAR(10) NOT NULL,
     product_name VARCHAR(255) NOT NULL,
