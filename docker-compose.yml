@@ -25,6 +25,21 @@ services:
     volumes:
       - dbgate_data:/root/.dbgate
 
+  app:
+    build: .
+    depends_on:
+      - postgresql
+    environment:
+      DATABASE_TYPE: 'postgresql'
+      DBAPI: 'psycopg2'
+      USER: 'master_tk'
+      PASSWORD: '120344'
+      HOST: 'db'
+      PORT: '5432'
+      DATABASE: 'master_tk'
+    ports:
+      - "8000:80"
+
 volumes:
   postgresql_data:
   dbgate_data:

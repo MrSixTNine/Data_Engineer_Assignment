@@ -14,5 +14,11 @@ docker run --rm ^
   busybox ^
   sh -c "tar xvf /backup/data_engineer_assignment_postgresql_data_empty.tar.gz -C /data"
 
+REM Build the Docker image
+docker build -t my-python-app .
+
+REM Run the Docker container
+docker run my-python-app
+
 REM Run Docker containers
-docker-compose up
+docker-compose up --build
