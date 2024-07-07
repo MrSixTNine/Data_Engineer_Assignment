@@ -17,6 +17,7 @@ def run_script(script_name):
 
 def main():
     scripts = [
+        'create_tables.py'
         'ingest_product_catalog.py',
         'ingest_customer_transactions.py',
         'process_product_sales_detail.py'
