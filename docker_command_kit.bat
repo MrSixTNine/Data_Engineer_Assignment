@@ -13,7 +13,4 @@ docker build -t my-python-app .
 REM Run Docker containers
 docker-compose up --build
 
-REM Run the Docker container
-docker run my-python-app
-
 

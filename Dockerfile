@@ -16,8 +16,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
-# Set the working directory to /app/code
+# Set the working directory to /app/Python Script
 WORKDIR /app/Python Script
 
-# Run pipeline.py when the container launches
-CMD ["python", "pipeline.py"]
+# Copy the wait-for-postgres.sh script into the container
+COPY wait-for-postgres.sh /usr/local/bin/wait-for-postgres.sh
+
+# Make the wait-for-postgres.sh script executable
+RUN chmod +x /usr/local/bin/wait-for-postgres.sh
+
+# CMD to wait for PostgreSQL and then run pipeline.py
+CMD ["wait-for-postgres.sh", "postgresql:5432", "--", "python", "pipeline.py"]
