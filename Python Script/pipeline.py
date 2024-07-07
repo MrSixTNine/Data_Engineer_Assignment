@@ -2,8 +2,8 @@ import subprocess
 import logging
 import sys
 
-# Setup logging
-logging.basicConfig(filename='pipeline.log', level=logging.INFO, 
+# Setup logging to log to console
+logging.basicConfig(stream=sys.stdout, level=logging.INFO, 
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 def run_script(script_name):
@@ -17,7 +17,7 @@ def run_script(script_name):
 
 def main():
     scripts = [
-        'create_tables.py'
+        'create_tables.py',
         'ingest_product_catalog.py',
         'ingest_customer_transactions.py',
         'process_product_sales_detail.py'

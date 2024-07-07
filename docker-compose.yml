@@ -18,27 +18,30 @@ services:
       - 3000:3000
     restart: unless-stopped
     environment:
-      CONNECTIONS: de_assingment
-      LABEL_de_assingment: de_assingment
-      URL_de_assingment: postgres://master_tk:120344@postgres:5432/master_tk
-      ENGINE_de_assingment: postgres@dbgate-plugin-postgres
+      CONNECTIONS: de_assignment
+      LABEL_de_assignment: de_assignment
+      URL_de_assignment: postgres://master_tk:120344@postgres:5432/master_tk
+      ENGINE_de_assignment: postgres@dbgate-plugin-postgres
     volumes:
       - dbgate_data:/root/.dbgate
 
+
   app:
     build: .
+    container_name: de_assignment
+    volumes:
+      - .:/app
+    command: python pipeline.py
     depends_on:
       - postgresql
     environment:
-      DATABASE_TYPE: 'postgresql'
-      DBAPI: 'psycopg2'
-      USER: 'master_tk'
-      PASSWORD: '120344'
-      HOST: 'db'
-      PORT: '5432'
-      DATABASE: 'master_tk'
-    ports:
-      - "8000:80"
+      - DATABASE_TYPE=postgresql
+      - DBAPI=psycopg2
+      - USER=master_tk
+      - PASSWORD=120344
+      - HOST=db
+      - PORT=5432
+      - DATABASE=master_tk
 
 volumes:
   postgresql_data:
